@@ -9,7 +9,9 @@ def gdrive():
     apiKey = config['google-drive']['api-key']
     folderId = config['google-drive']['folder-id']
     driveURL = "https://www.googleapis.com/drive/v3/files?q='{}'+in+parents&key={}".format(folderId, apiKey)
-    return requests.get(driveURL).text
+    response = requests.get(driveURL).text
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 def loadconfig():
     with open('./config.json', 'r+') as configFile:
