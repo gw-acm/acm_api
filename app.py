@@ -8,7 +8,7 @@ app = Flask(__name__)
 def gdrive():
     apiKey = config['google-drive']['api-key']
     folderId = config['google-drive']['folder-id']
-    driveURL = "https://www.googleapis.com/drive/v3/files?q='{}'+in+parents&key={}".format(apiKey, folderId)
+    driveURL = "https://www.googleapis.com/drive/v3/files?q='{}'+in+parents&key={}".format(folderId, apiKey)
     return requests.get(driveURL).text
 
 def loadconfig():
