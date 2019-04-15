@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 import requests
 import json
 
@@ -9,7 +9,7 @@ def gdrive():
     apiKey = config['google-drive']['api-key']
     folderId = config['google-drive']['folder-id']
     driveURL = "https://www.googleapis.com/drive/v3/files?q='{}'+in+parents&key={}".format(folderId, apiKey)
-    response = requests.get(driveURL).text
+    response = jsonify(json.loads(requests.get(driveURL).text))
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
